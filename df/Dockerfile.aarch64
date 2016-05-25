@@ -1,1 +1,1 @@
-FROM aarch64/ubuntu:latest
+FROM aarch64/ubuntu:16.04
