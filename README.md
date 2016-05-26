@@ -41,7 +41,7 @@
 > Edit `Dockerfile.build` and change `-j` to the correct number of `make` jobs.
 
 ```
-make # or make ARCH=armv7l to force 32-bit build
+make ARCH=armv7l # currently aarch64 fails to build, 32-bit version runs on aarch64 just fine
 ```
 
 This will build two images, `armv7l/bitcoinbuild` and `armv7l/bitcoin`.  The later is optimized for space and contains only the runtime and its dependancies.
