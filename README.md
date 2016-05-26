@@ -1,6 +1,6 @@
-### Ubuntu 16.04 armhf/aarch64 Bitcoin fullnode build and run containers
+### Ubuntu armhf/aarch64 Bitcoin fullnode build and run containers
 
-#### Tested (build):
+#### Tested:
 
 1. Odroid UX4, 16 GB eMMC, USB3/120 GB SSD, Ubuntu 15.04 32-bit, Docker 1.6.1, Bitcoin 0.12.1
 
@@ -13,7 +13,10 @@
 	Targets:
 	
 	1. Ubuntu 15.10 armv71 
-	2. Ubuntu 16.04 aarch64
+	2. Ubuntu 14.04 aarch64 (failed to build, internal compiler error)
+	2. Ubuntu 15.04 aarch64 (failed to build, internal compiler error)
+	2. Ubuntu 16.10 aarch64 (failed to build, internal compiler error)
+	2. Ubuntu 16.04 aarch64 (failed to build, internal compiler error)
 
 
 #### Notes:
@@ -41,14 +44,15 @@
 make # or make ARCH=armv7l to force 32-bit build
 ```
 
-This will build two images, `bitcoinbuild` and `bitcoin`.  The later is optimized for space and contains only the runtime and its dependancies.
+This will build two images, `armv7l/bitcoinbuild` and `armv7l/bitcoin`.  The later is optimized for space and contains only the runtime and its dependancies.
 
 #### Build Times:
 
-| Platform    | OS Storage   | Docker/Swap Storage | Swap* (GB) | -j (jobs) | Time (min) |
-|-------------|--------------|---------------------|:----------:|:---------:|-----------:|
-| Odroid UX4  | eMMC         | USB3 SSD            | 4          |         4 |         72 |
-| Odroid C2   | eMMC         | USB2 SSD            | 4          |         4 |         82 |
+| Platform    | OS Storage   | Docker/Swap Storage | Swap\* (GB) | -j (jobs) | Target  | Time (min) |
+|-------------|--------------|---------------------|:-----------:|:---------:|---------|-----------:|
+| Odroid UX4  | eMMC         | USB3 SSD            | 4           |         4 | armv7l  |         72 |
+| Odroid C2   | eMMC         | USB2 SSD            | 4           |         4 | armv7l  |         82 |
+| Odroid C2   | eMMC         | USB2 SSD            | 4           |         4 | aarch64 |       FAIL |
 
 \* Swap on SD/eMMC is a poor idea and a quick way to wear them out.
 
