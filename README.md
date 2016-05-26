@@ -24,9 +24,9 @@
 #### Requirements:
 
 1. `apt-get install docker.io` (or equiv)
-1. `/var/lib/docker` needs 2.5 GB of space (not including data).
+1. `/var/lib/docker` needs ~4 GB of space (not including data).
 
-	> Recommend that you use SSD on USB and move /var/lib/docker there.
+	> Recommend that you use external HD on USB and move /var/lib/docker there.
 
 1. `systemctl enable docker`
 1. `systemctl start docker`
