@@ -13,15 +13,12 @@
 	Targets:
 	
 	1. Ubuntu 15.10 armv71 
-	2. Ubuntu 14.04 aarch64 (failed to build, internal compiler error)
-	2. Ubuntu 15.04 aarch64 (failed to build, internal compiler error)
-	2. Ubuntu 16.10 aarch64 (failed to build, internal compiler error)
-	2. Ubuntu 16.04 aarch64 (failed to build, internal compiler error)
+	2. Ubuntu 16.04 aarch64 (`-j 1` only, otherwise internal compiler error)
 
 
 #### Notes:
 
-1. Pulling down the entire blockchain will take ~2 days and ~52GB of space.
+1. Pulling down the entire blockchain will take ~3 days and ~82GB of space (May 26 2016 statement).
 1. By default every core will be running `bitcoin-scriptc`.  If you want to limit the overhead of this container, then edit `bitcoind.service` and change `VER_THREADS=0` to `VER_THREADS=n` where *n* is the max number of cores to use.
 
 #### Requirements:
@@ -33,18 +30,28 @@
 
 1. `systemctl enable docker`
 1. `systemctl start docker`
-1. ~52GB of data storage for an indexed fullnode
+1. ~82GB of data storage for an indexed fullnode (May 26 2016 statement)
 1. `sudo -s # be lazy :-)`
 
 #### Build:
 
 > Edit `Dockerfile.build` and change `-j` to the correct number of `make` jobs.
 
+> NOTE: `aarach64` build only passed with `-j 1`
+
 ```
-make ARCH=armv7l # currently aarch64 fails to build, 32-bit version runs on aarch64 just fine
+make
 ```
 
-This will build two images, `armv7l/bitcoinbuild` and `armv7l/bitcoin`.  The later is optimized for space and contains only the runtime and its dependancies.
+or
+
+```
+make ARCH=armv7l
+```
+
+to force 32-bit build on 64-bit ARM.
+
+This will build two images, `armv7l/bitcoinbuild` and `armv7l/bitcoin` (or `aarch64/bitcoinbuild` and `aarch64/bitcoin`).  The later is optimized for space and contains only the runtime and its dependancies.
 
 #### Build Times:
 
@@ -52,7 +59,7 @@ This will build two images, `armv7l/bitcoinbuild` and `armv7l/bitcoin`.  The lat
 |-------------|--------------|---------------------|:-----------:|:---------:|---------|-----------:|
 | Odroid UX4  | eMMC         | USB3 SSD            | 4           |         4 | armv7l  |         72 |
 | Odroid C2   | eMMC         | USB2 SSD            | 4           |         4 | armv7l  |         82 |
-| Odroid C2   | eMMC         | USB2 SSD            | 4           |         4 | aarch64 |       FAIL |
+| Odroid C2   | eMMC         | USB2 SSD            | 4           |         1 | aarch64 |            |
 
 \* Swap on SD/eMMC is a poor idea and a quick way to wear them out.
 
@@ -83,7 +90,7 @@ chown -R bitcoin.bitcoin /ssd/bitcoin_data
 docker run --name=bitcoind -d \
     -e 'DATADIR=/tmp/bitcoin_data' \
     -v /ssd/bitcoin_data:/tmp/bitcoin_data \
-    armv7l/bitcoin:latest
+    $(uname -m)/bitcoin:latest
 ```
 
 #### Check:
