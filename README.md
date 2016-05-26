@@ -37,7 +37,7 @@
 
 > Edit `Dockerfile.build` and change `-j` to the correct number of `make` jobs.
 
-> NOTE: `aarach64` build only passed with `-j 1`
+> NOTE: `aarch64` build only passed with `-j 1`
 
 ```
 make
