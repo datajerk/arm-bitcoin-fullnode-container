@@ -15,7 +15,7 @@
 	1. Ubuntu 15.10 armv71 
 	2. Ubuntu 16.04 aarch64
 
-		Required settings to prevent lowmemorykiller from killing build:
+		Required settings to prevent `lowmemorykiller` from killing build:
 
 		```
 		echo '9999' > /sys/module/lowmemorykiller/parameters/adj
@@ -63,7 +63,7 @@ This will build two images, `armv7l/bitcoinbuild` and `armv7l/bitcoin` (or `aarc
 |-------------|--------------|---------------------|:-----------:|:---------:|---------|-----------:|
 | Odroid UX4  | eMMC         | USB3 SSD            | 4           |         4 | armv7l  |         72 |
 | Odroid C2   | eMMC         | USB2 SSD            | 4           |         4 | armv7l  |         82 |
-| Odroid C2   | eMMC         | USB2 SSD            | 4           |         4 | aarch64 |            |
+| Odroid C2   | eMMC         | USB2 SSD            | 4           |         4 | aarch64 |        113 |
 | Odroid C2   | eMMC         | USB2 SSD            | 0           |         1 | aarch64 |        144 |
 
 \* Swap on SD/eMMC is a poor idea and a quick way to wear them out.
