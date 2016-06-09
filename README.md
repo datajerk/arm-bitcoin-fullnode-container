@@ -7,6 +7,7 @@
 	Targets:
 	
 	1. Ubuntu 15.10 armv71 
+	1. Ubuntu 16.04 armv71 
 
 1. Odroid C2, 16 GB eMMC, USB2/60 GB SSD, Ubuntu 16.04 64-bit, Docker 1.10.3, Bitcoin 0.12.1
 
